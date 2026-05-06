@@ -52,6 +52,40 @@
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
+        .lang-dropdown {
+            position: relative;
+        }
+        .lang-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 0.25rem;
+            min-width: 8rem;
+            z-index: 50;
+        }
+        .lang-dropdown-content.show {
+            display: block;
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+        .lang-option:hover {
+            background-color: #f3f4f6;
+        }
+        .lang-option.active {
+            background-color: #eef2ff;
+            color: #6366f1;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -62,19 +96,33 @@
                     <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
                         <i class="fas fa-brain text-white text-xl"></i>
                     </div>
-                    <span class="text-xl font-bold gradient-text">AI物料集市</span>
+                    <span class="text-xl font-bold gradient-text" data-lang="brand">AI物料集市</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-indigo-600 transition-colors">功能特色</a>
-                    <a href="#materials" class="text-gray-600 hover:text-indigo-600 transition-colors">热门物料</a>
-                    <a href="#creators" class="text-gray-600 hover:text-indigo-600 transition-colors">创作者</a>
-                    <a href="#custom" class="text-gray-600 hover:text-indigo-600 transition-colors">定制服务</a>
+                    <a href="#features" class="text-gray-600 hover:text-indigo-600 transition-colors" data-lang="nav_features">功能特色</a>
+                    <a href="#materials" class="text-gray-600 hover:text-indigo-600 transition-colors" data-lang="nav_materials">热门物料</a>
+                    <a href="#creators" class="text-gray-600 hover:text-indigo-600 transition-colors" data-lang="nav_creators">创作者</a>
+                    <a href="#custom" class="text-gray-600 hover:text-indigo-600 transition-colors" data-lang="nav_custom">定制服务</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="hidden sm:block px-4 py-2 text-gray-600 hover:text-indigo-600 transition-colors">登录</button>
-                    <button class="px-5 py-2.5 gradient-bg text-white rounded-full font-medium hover:opacity-90 transition-opacity">
-                        免费发布
-                    </button>
+                    <div class="lang-dropdown">
+                        <button id="lang-toggle" class="flex items-center space-x-1 px-3 py-2 rounded-full hover:bg-gray-100 transition-colors">
+                            <span class="text-sm font-medium" id="current-lang">English</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="lang-menu" class="lang-dropdown-content">
+                            <div class="lang-option" data-lang-value="zh">
+                                <span>🇨🇳</span>
+                                <span class="ml-2">中文</span>
+                            </div>
+                            <div class="lang-option active" data-lang-value="en">
+                                <span>🇺🇸</span>
+                                <span class="ml-2">English</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="hidden sm:block px-4 py-2 text-gray-600 hover:text-indigo-600 transition-colors" data-lang="nav_login">Login</button>
+                    <button class="px-5 py-2.5 gradient-bg text-white rounded-full font-medium hover:opacity-90 transition-opacity" data-lang="nav_publish">Publish Free</button>
                 </div>
             </div>
         </div>
@@ -89,40 +137,40 @@
             <div class="text-center">
                 <div class="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm mb-6">
                     <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                    <span class="text-sm text-gray-600">已有 <strong class="text-indigo-600">10,000+</strong> 创作者入驻</span>
+                    <span class="text-sm text-gray-600" data-lang="hero_stat">已有 <strong class="text-indigo-600">10,000+</strong> 创作者入驻</span>
                 </div>
                 
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    发现无限创意<br>
-                    <span class="gradient-text">AI物料交易平台</span>
+                    <span data-lang="hero_title1">发现无限创意</span><br>
+                    <span class="gradient-text" data-lang="hero_title2">AI物料交易平台</span>
                 </h1>
                 
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10" data-lang="hero_desc">
                     购买和出售AI生成的视频、短剧、宣传片、图片素材<br>
                     抽卡剩余物料二次利用，创作者定制服务一站搞定
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                    <button class="w-full sm:w-auto px-8 py-4 gradient-bg text-white rounded-full font-semibold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl">
+                    <button class="w-full sm:w-auto px-8 py-4 gradient-bg text-white rounded-full font-semibold text-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl" data-lang="hero_explore">
                         开始探索
                     </button>
                     <button class="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 rounded-full font-semibold text-lg hover:bg-gray-50 transition-colors border border-gray-200">
-                        <i class="fas fa-play-circle mr-2"></i>观看视频
+                        <i class="fas fa-play-circle mr-2"></i><span data-lang="hero_video">观看视频</span>
                     </button>
                 </div>
 
                 <div class="flex items-center justify-center space-x-8 text-sm text-gray-500">
                     <div class="flex items-center">
                         <i class="fas fa-users mr-2 text-indigo-500"></i>
-                        <span>10万+ 用户</span>
+                        <span data-lang="stats_users">10万+ 用户</span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-file-video mr-2 text-purple-500"></i>
-                        <span>50万+ 物料</span>
+                        <span data-lang="stats_materials">50万+ 物料</span>
                     </div>
                     <div class="flex items-center">
                         <i class="fas fa-star mr-2 text-pink-500"></i>
-                        <span>98% 好评</span>
+                        <span data-lang="stats_rating">98% 好评</span>
                     </div>
                 </div>
             </div>
@@ -132,28 +180,28 @@
                     <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-3">
                         <i class="fas fa-video text-indigo-600 text-xl"></i>
                     </div>
-                    <h3 class="font-semibold text-gray-800">视频素材</h3>
+                    <h3 class="font-semibold text-gray-800" data-lang="cat_videos">视频素材</h3>
                     <p class="text-sm text-gray-500">20万+</p>
                 </div>
                 <div class="bg-white rounded-2xl p-4 shadow-sm card-hover">
                     <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
                         <i class="fas fa-film text-purple-600 text-xl"></i>
                     </div>
-                    <h3 class="font-semibold text-gray-800">短剧片段</h3>
+                    <h3 class="font-semibold text-gray-800" data-lang="cat_shorts">短剧片段</h3>
                     <p class="text-sm text-gray-500">15万+</p>
                 </div>
                 <div class="bg-white rounded-2xl p-4 shadow-sm card-hover">
                     <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-3">
                         <i class="fas fa-image text-pink-600 text-xl"></i>
                     </div>
-                    <h3 class="font-semibold text-gray-800">图片素材</h3>
+                    <h3 class="font-semibold text-gray-800" data-lang="cat_images">图片素材</h3>
                     <p class="text-sm text-gray-500">18万+</p>
                 </div>
                 <div class="bg-white rounded-2xl p-4 shadow-sm card-hover">
                     <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-3">
                         <i class="fas fa-briefcase text-green-600 text-xl"></i>
                     </div>
-                    <h3 class="font-semibold text-gray-800">定制服务</h3>
+                    <h3 class="font-semibold text-gray-800" data-lang="cat_custom">定制服务</h3>
                     <p class="text-sm text-gray-500">5万+</p>
                 </div>
             </div>
@@ -167,8 +215,8 @@
     <section id="features" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-indigo-600 font-medium">为什么选择我们</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">平台特色功能</h2>
+                <span class="text-indigo-600 font-medium" data-lang="features_subtitle">为什么选择我们</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" data-lang="features_title">平台特色功能</h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
@@ -176,22 +224,22 @@
                     <div class="w-14 h-14 gradient-bg rounded-2xl flex items-center justify-center mb-6">
                         <i class="fas fa-recycle text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">物料二次利用</h3>
-                    <p class="text-gray-600">抽卡剩余的AI生成物料可以再次交易，最大化您的创作价值</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-lang="feature_recycle">物料二次利用</h3>
+                    <p class="text-gray-600" data-lang="feature_recycle_desc">抽卡剩余的AI生成物料可以再次交易，最大化您的创作价值</p>
                 </div>
                 <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
                     <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fas fa-shield-alt text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">版权保护</h3>
-                    <p class="text-gray-600">所有物料均经过版权审核，购买即获得商用授权</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-lang="feature_copyright">版权保护</h3>
+                    <p class="text-gray-600" data-lang="feature_copyright_desc">所有物料均经过版权审核，购买即获得商用授权</p>
                 </div>
                 <div class="bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl p-8 border border-pink-100">
                     <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fas fa-headset text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">定制服务</h3>
-                    <p class="text-gray-600">直接对接创作者，按需定制专属视频、图片等创意内容</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-lang="feature_service">定制服务</h3>
+                    <p class="text-gray-600" data-lang="feature_service_desc">直接对接创作者，按需定制专属视频、图片等创意内容</p>
                 </div>
             </div>
         </div>
@@ -201,13 +249,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
                 <div>
-                    <span class="text-indigo-600 font-medium">热门物料</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">发现优质素材</h2>
+                    <span class="text-indigo-600 font-medium" data-lang="materials_subtitle">热门物料</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" data-lang="materials_title">发现优质素材</h2>
                 </div>
                 <div class="flex items-center space-x-2 mt-4 md:mt-0">
-                    <button class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">最新</button>
-                    <button class="px-4 py-2 gradient-bg text-white rounded-full text-sm font-medium">最热门</button>
-                    <button class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">价格</button>
+                    <button class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors" data-lang="filter_newest">最新</button>
+                    <button class="px-4 py-2 gradient-bg text-white rounded-full text-sm font-medium" data-lang="filter_hottest">最热门</button>
+                    <button class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors" data-lang="filter_price">价格</button>
                 </div>
             </div>
 
@@ -215,52 +263,52 @@
                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover">
                     <div class="relative aspect-video bg-gradient-to-br from-indigo-200 to-purple-200">
                         <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=AI%20generated%20beautiful%20landscape%20video%20thumbnail&image_size=landscape_16_9" alt="视频素材" class="w-full h-full object-cover">
-                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white">视频</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white" data-lang="material_video">视频</div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 truncate">科技感城市宣传片</h3>
+                        <h3 class="font-semibold text-gray-800 truncate" data-lang="material_vid1">科技感城市宣传片</h3>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-indigo-600 font-bold">¥99</span>
-                            <span class="text-xs text-gray-500">1.2k 购买</span>
+                            <span class="text-xs text-gray-500" data-lang="material_purchases">1.2k 购买</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover">
                     <div class="relative aspect-video bg-gradient-to-br from-purple-200 to-pink-200">
                         <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=AI%20generated%20fantasy%20character%20portrait&image_size=portrait_16_9" alt="图片素材" class="w-full h-full object-cover">
-                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white">图片</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white" data-lang="material_image">图片</div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 truncate">奇幻角色插画</h3>
+                        <h3 class="font-semibold text-gray-800 truncate" data-lang="material_img1">奇幻角色插画</h3>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-indigo-600 font-bold">¥49</span>
-                            <span class="text-xs text-gray-500">856 购买</span>
+                            <span class="text-xs text-gray-500" data-lang="material_purchases">856 购买</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover">
                     <div class="relative aspect-video bg-gradient-to-br from-pink-200 to-orange-200">
                         <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=AI%20generated%20short%20film%20scene%20dramatic&image_size=landscape_16_9" alt="短剧片段" class="w-full h-full object-cover">
-                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white">短剧</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white" data-lang="material_short">短剧</div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 truncate">情感短剧片段</h3>
+                        <h3 class="font-semibold text-gray-800 truncate" data-lang="material_short1">情感短剧片段</h3>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-indigo-600 font-bold">¥199</span>
-                            <span class="text-xs text-gray-500">523 购买</span>
+                            <span class="text-xs text-gray-500" data-lang="material_purchases">523 购买</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover">
                     <div class="relative aspect-video bg-gradient-to-br from-orange-200 to-yellow-200">
                         <img src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=AI%20generated%20product%20promotional%20video%20thumbnail&image_size=landscape_16_9" alt="宣传片" class="w-full h-full object-cover">
-                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white">宣传片</div>
+                        <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/50 rounded text-xs text-white" data-lang="material_promo">宣传片</div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 truncate">产品宣传短片</h3>
+                        <h3 class="font-semibold text-gray-800 truncate" data-lang="material_promo1">产品宣传短片</h3>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-indigo-600 font-bold">¥299</span>
-                            <span class="text-xs text-gray-500">312 购买</span>
+                            <span class="text-xs text-gray-500" data-lang="material_purchases">312 购买</span>
                         </div>
                     </div>
                 </div>
@@ -268,7 +316,7 @@
 
             <div class="text-center mt-10">
                 <button class="px-8 py-3 bg-white border border-gray-200 rounded-full font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                    查看更多物料 <i class="fas fa-arrow-right ml-2"></i>
+                    <span data-lang="materials_more">查看更多物料</span> <i class="fas fa-arrow-right ml-2"></i>
                 </button>
             </div>
         </div>
@@ -277,8 +325,8 @@
     <section id="creators" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-indigo-600 font-medium">优秀创作者</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">认证创作者推荐</h2>
+                <span class="text-indigo-600 font-medium" data-lang="creators_subtitle">优秀创作者</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2" data-lang="creators_title">认证创作者推荐</h2>
             </div>
 
             <div class="grid md:grid-cols-4 gap-6">
@@ -286,64 +334,64 @@
                     <div class="w-20 h-20 mx-auto gradient-bg rounded-full flex items-center justify-center mb-4">
                         <i class="fas fa-user text-white text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-900">创意达人小王</h3>
-                    <p class="text-sm text-gray-500 mt-1">视频创作</p>
+                    <h3 class="font-bold text-gray-900" data-lang="creator1">创意达人小王</h3>
+                    <p class="text-sm text-gray-500 mt-1" data-lang="creator1_type">视频创作</p>
                     <div class="flex items-center justify-center mt-3">
-                        <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full">认证</span>
+                        <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full" data-lang="verified">认证</span>
                     </div>
                     <div class="flex items-center justify-center mt-3 text-sm text-gray-500">
                         <i class="fas fa-star text-yellow-400 mr-1"></i>
                         <span>4.9</span>
                         <span class="mx-2">|</span>
-                        <span>321 作品</span>
+                        <span data-lang="creator_works">321 作品</span>
                     </div>
                 </div>
                 <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl card-hover">
                     <div class="w-20 h-20 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
                         <i class="fas fa-user text-white text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-900">视觉艺术家</h3>
-                    <p class="text-sm text-gray-500 mt-1">图片创作</p>
+                    <h3 class="font-bold text-gray-900" data-lang="creator2">视觉艺术家</h3>
+                    <p class="text-sm text-gray-500 mt-1" data-lang="creator2_type">图片创作</p>
                     <div class="flex items-center justify-center mt-3">
-                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">认证</span>
+                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full" data-lang="verified">认证</span>
                     </div>
                     <div class="flex items-center justify-center mt-3 text-sm text-gray-500">
                         <i class="fas fa-star text-yellow-400 mr-1"></i>
                         <span>4.8</span>
                         <span class="mx-2">|</span>
-                        <span>512 作品</span>
+                        <span data-lang="creator_works">512 作品</span>
                     </div>
                 </div>
                 <div class="text-center p-6 bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl card-hover">
                     <div class="w-20 h-20 mx-auto bg-gradient-to-br from-pink-500 to-orange-500 rounded-full flex items-center justify-center mb-4">
                         <i class="fas fa-user text-white text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-900">短剧导演阿杰</h3>
-                    <p class="text-sm text-gray-500 mt-1">短剧创作</p>
+                    <h3 class="font-bold text-gray-900" data-lang="creator3">短剧导演阿杰</h3>
+                    <p class="text-sm text-gray-500 mt-1" data-lang="creator3_type">短剧创作</p>
                     <div class="flex items-center justify-center mt-3">
-                        <span class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full">认证</span>
+                        <span class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded-full" data-lang="verified">认证</span>
                     </div>
                     <div class="flex items-center justify-center mt-3 text-sm text-gray-500">
                         <i class="fas fa-star text-yellow-400 mr-1"></i>
                         <span>4.9</span>
                         <span class="mx-2">|</span>
-                        <span>156 作品</span>
+                        <span data-lang="creator_works">156 作品</span>
                     </div>
                 </div>
                 <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl card-hover">
                     <div class="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center mb-4">
                         <i class="fas fa-user text-white text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-900">宣传片大师</h3>
-                    <p class="text-sm text-gray-500 mt-1">宣传片创作</p>
+                    <h3 class="font-bold text-gray-900" data-lang="creator4">宣传片大师</h3>
+                    <p class="text-sm text-gray-500 mt-1" data-lang="creator4_type">宣传片创作</p>
                     <div class="flex items-center justify-center mt-3">
-                        <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">认证</span>
+                        <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full" data-lang="verified">认证</span>
                     </div>
                     <div class="flex items-center justify-center mt-3 text-sm text-gray-500">
                         <i class="fas fa-star text-yellow-400 mr-1"></i>
                         <span>4.7</span>
                         <span class="mx-2">|</span>
-                        <span>208 作品</span>
+                        <span data-lang="creator_works">208 作品</span>
                     </div>
                 </div>
             </div>
@@ -353,18 +401,18 @@
     <section id="custom" class="py-20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center text-white">
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm">定制服务</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4">找不到满意的素材？</h2>
-                <p class="text-lg text-white/80 max-w-2xl mx-auto mb-10">
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm" data-lang="custom_subtitle">定制服务</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4" data-lang="custom_title">找不到满意的素材？</h2>
+                <p class="text-lg text-white/80 max-w-2xl mx-auto mb-10" data-lang="custom_desc">
                     直接对接认证创作者，按需定制专属视频、图片等创意内容<br>
                     专业团队为您打造独一无二的视觉作品
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button class="w-full sm:w-auto px-8 py-4 bg-white text-indigo-600 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
+                    <button class="w-full sm:w-auto px-8 py-4 bg-white text-indigo-600 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors" data-lang="custom_post">
                         发布定制需求
                     </button>
-                    <button class="w-full sm:w-auto px-8 py-4 bg-white/20 text-white rounded-full font-semibold text-lg hover:bg-white/30 transition-colors">
+                    <button class="w-full sm:w-auto px-8 py-4 bg-white/20 text-white rounded-full font-semibold text-lg hover:bg-white/30 transition-colors" data-lang="custom_view">
                         查看创作者
                     </button>
                 </div>
@@ -374,22 +422,22 @@
                         <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
                             <i class="fas fa-clock text-white text-xl"></i>
                         </div>
-                        <h3 class="font-bold text-lg">快速响应</h3>
-                        <p class="text-white/70 text-sm mt-2">创作者24小时内响应需求</p>
+                        <h3 class="font-bold text-lg" data-lang="custom_fast">快速响应</h3>
+                        <p class="text-white/70 text-sm mt-2" data-lang="custom_fast_desc">创作者24小时内响应需求</p>
                     </div>
                     <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
                         <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
                             <i class="fas fa-shield text-white text-xl"></i>
                         </div>
-                        <h3 class="font-bold text-lg">品质保障</h3>
-                        <p class="text-white/70 text-sm mt-2">不满意可申请修改或退款</p>
+                        <h3 class="font-bold text-lg" data-lang="custom_quality">品质保障</h3>
+                        <p class="text-white/70 text-sm mt-2" data-lang="custom_quality_desc">不满意可申请修改或退款</p>
                     </div>
                     <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
                         <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-4">
                             <i class="fas fa-wallet text-white text-xl"></i>
                         </div>
-                        <h3 class="font-bold text-lg">安全交易</h3>
-                        <p class="text-white/70 text-sm mt-2">资金托管，确认满意后才付款</p>
+                        <h3 class="font-bold text-lg" data-lang="custom_safe">安全交易</h3>
+                        <p class="text-white/70 text-sm mt-2" data-lang="custom_safe_desc">资金托管，确认满意后才付款</p>
                     </div>
                 </div>
             </div>
@@ -401,40 +449,40 @@
             <div class="bg-white rounded-3xl p-8 md:p-12 shadow-lg">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-4">加入我们的创作者社区</h2>
-                        <p class="text-gray-600 mb-6">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4" data-lang="join_title">加入我们的创作者社区</h2>
+                        <p class="text-gray-600 mb-6" data-lang="join_desc">
                             发布您的AI生成物料，与全球买家建立联系，开启您的创意变现之旅
                         </p>
                         <ul class="space-y-3">
                             <li class="flex items-center">
                                 <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                <span>零成本入驻，免费发布</span>
+                                <span data-lang="join_item1">零成本入驻，免费发布</span>
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                <span>高分成比例，收入透明</span>
+                                <span data-lang="join_item2">高分成比例，收入透明</span>
                             </li>
                             <li class="flex items-center">
                                 <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                <span>专业运营支持</span>
+                                <span data-lang="join_item3">专业运营支持</span>
                             </li>
                         </ul>
-                        <button class="mt-6 px-8 py-3 gradient-bg text-white rounded-full font-semibold hover:opacity-90 transition-opacity">
+                        <button class="mt-6 px-8 py-3 gradient-bg text-white rounded-full font-semibold hover:opacity-90 transition-opacity" data-lang="join_button">
                             立即入驻
                         </button>
                     </div>
                     <div class="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl p-8">
                         <div class="text-center">
                             <div class="text-5xl font-bold gradient-text mb-2">¥280万+</div>
-                            <p class="text-gray-600">创作者累计收入</p>
+                            <p class="text-gray-600" data-lang="join_earnings">创作者累计收入</p>
                             <div class="mt-6 grid grid-cols-2 gap-4">
                                 <div class="text-center">
                                     <div class="text-2xl font-bold text-gray-900">10,000+</div>
-                                    <div class="text-sm text-gray-500">创作者</div>
+                                    <div class="text-sm text-gray-500" data-lang="join_creators">创作者</div>
                                 </div>
                                 <div class="text-center">
                                     <div class="text-2xl font-bold text-gray-900">50万+</div>
-                                    <div class="text-sm text-gray-500">作品数量</div>
+                                    <div class="text-sm text-gray-500" data-lang="join_works">作品数量</div>
                                 </div>
                             </div>
                         </div>
@@ -452,42 +500,42 @@
                         <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
                             <i class="fas fa-brain text-white text-xl"></i>
                         </div>
-                        <span class="text-xl font-bold">AI物料集市</span>
+                        <span class="text-xl font-bold" data-lang="brand">AI物料集市</span>
                     </div>
-                    <p class="text-gray-400 text-sm">
+                    <p class="text-gray-400 text-sm" data-lang="footer_desc">
                         发现无限创意，连接创作者与买家的AI物料交易平台
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">平台</h4>
+                    <h4 class="font-semibold mb-4" data-lang="footer_platform">平台</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">关于我们</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">入驻创作者</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">帮助中心</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_about">关于我们</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_join">入驻创作者</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_help">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_contact">联系我们</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">资源</h4>
+                    <h4 class="font-semibold mb-4" data-lang="footer_resources">资源</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">视频素材</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">图片素材</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">短剧片段</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">定制服务</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="cat_videos">视频素材</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="cat_images">图片素材</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="cat_shorts">短剧片段</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="cat_custom">定制服务</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">法律</h4>
+                    <h4 class="font-semibold mb-4" data-lang="footer_legal">法律</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">用户协议</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">隐私政策</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">版权声明</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">退款政策</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_terms">用户协议</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_privacy">隐私政策</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_copyright">版权声明</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-lang="footer_refund">退款政策</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row items-center justify-between">
-                <p class="text-gray-400 text-sm">© 2024 AI物料集市. All rights reserved.</p>
+                <p class="text-gray-400 text-sm" data-lang="footer_copyright">© 2024 AI物料集市. All rights reserved.</p>
                 <div class="flex items-center space-x-6 mt-4 md:mt-0">
                     <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-weixin"></i></a>
                     <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-weibo"></i></a>
@@ -498,6 +546,235 @@
     </footer>
 
     <script>
+        const translations = {
+            zh: {
+                brand: 'AI物料集市',
+                nav_features: '功能特色',
+                nav_materials: '热门物料',
+                nav_creators: '创作者',
+                nav_custom: '定制服务',
+                nav_login: '登录',
+                nav_publish: '免费发布',
+                hero_stat: '已有 <strong class="text-indigo-600">10,000+</strong> 创作者入驻',
+                hero_title1: '发现无限创意',
+                hero_title2: 'AI物料交易平台',
+                hero_desc: '购买和出售AI生成的视频、短剧、宣传片、图片素材<br>抽卡剩余物料二次利用，创作者定制服务一站搞定',
+                hero_explore: '开始探索',
+                hero_video: '观看视频',
+                stats_users: '10万+ 用户',
+                stats_materials: '50万+ 物料',
+                stats_rating: '98% 好评',
+                cat_videos: '视频素材',
+                cat_shorts: '短剧片段',
+                cat_images: '图片素材',
+                cat_custom: '定制服务',
+                features_subtitle: '为什么选择我们',
+                features_title: '平台特色功能',
+                feature_recycle: '物料二次利用',
+                feature_recycle_desc: '抽卡剩余的AI生成物料可以再次交易，最大化您的创作价值',
+                feature_copyright: '版权保护',
+                feature_copyright_desc: '所有物料均经过版权审核，购买即获得商用授权',
+                feature_service: '定制服务',
+                feature_service_desc: '直接对接创作者，按需定制专属视频、图片等创意内容',
+                materials_subtitle: '热门物料',
+                materials_title: '发现优质素材',
+                filter_newest: '最新',
+                filter_hottest: '最热门',
+                filter_price: '价格',
+                material_video: '视频',
+                material_image: '图片',
+                material_short: '短剧',
+                material_promo: '宣传片',
+                material_vid1: '科技感城市宣传片',
+                material_img1: '奇幻角色插画',
+                material_short1: '情感短剧片段',
+                material_promo1: '产品宣传短片',
+                material_purchases: '购买',
+                materials_more: '查看更多物料',
+                creators_subtitle: '优秀创作者',
+                creators_title: '认证创作者推荐',
+                creator1: '创意达人小王',
+                creator1_type: '视频创作',
+                creator2: '视觉艺术家',
+                creator2_type: '图片创作',
+                creator3: '短剧导演阿杰',
+                creator3_type: '短剧创作',
+                creator4: '宣传片大师',
+                creator4_type: '宣传片创作',
+                verified: '认证',
+                creator_works: '作品',
+                custom_subtitle: '定制服务',
+                custom_title: '找不到满意的素材？',
+                custom_desc: '直接对接认证创作者，按需定制专属视频、图片等创意内容<br>专业团队为您打造独一无二的视觉作品',
+                custom_post: '发布定制需求',
+                custom_view: '查看创作者',
+                custom_fast: '快速响应',
+                custom_fast_desc: '创作者24小时内响应需求',
+                custom_quality: '品质保障',
+                custom_quality_desc: '不满意可申请修改或退款',
+                custom_safe: '安全交易',
+                custom_safe_desc: '资金托管，确认满意后才付款',
+                join_title: '加入我们的创作者社区',
+                join_desc: '发布您的AI生成物料，与全球买家建立联系，开启您的创意变现之旅',
+                join_item1: '零成本入驻，免费发布',
+                join_item2: '高分成比例，收入透明',
+                join_item3: '专业运营支持',
+                join_button: '立即入驻',
+                join_earnings: '创作者累计收入',
+                join_creators: '创作者',
+                join_works: '作品数量',
+                footer_desc: '发现无限创意，连接创作者与买家的AI物料交易平台',
+                footer_platform: '平台',
+                footer_about: '关于我们',
+                footer_join: '入驻创作者',
+                footer_help: '帮助中心',
+                footer_contact: '联系我们',
+                footer_resources: '资源',
+                footer_legal: '法律',
+                footer_terms: '用户协议',
+                footer_privacy: '隐私政策',
+                footer_copyright: '版权声明',
+                footer_refund: '退款政策',
+                footer_copyright_text: '© 2024 AI物料集市. All rights reserved.'
+            },
+            en: {
+                brand: 'AI Material Market',
+                nav_features: 'Features',
+                nav_materials: 'Hot Materials',
+                nav_creators: 'Creators',
+                nav_custom: 'Custom Service',
+                nav_login: 'Login',
+                nav_publish: 'Publish Free',
+                hero_stat: '<strong class="text-indigo-600">10,000+</strong> Creators Joined',
+                hero_title1: 'Discover Unlimited Creativity',
+                hero_title2: 'AI Material Marketplace',
+                hero_desc: 'Buy and sell AI-generated videos, short films, promos, images<br>Recycle unused AI materials, connect with creators for custom orders',
+                hero_explore: 'Start Exploring',
+                hero_video: 'Watch Video',
+                stats_users: '100K+ Users',
+                stats_materials: '500K+ Materials',
+                stats_rating: '98% Positive',
+                cat_videos: 'Video Footage',
+                cat_shorts: 'Short Films',
+                cat_images: 'Images',
+                cat_custom: 'Custom Service',
+                features_subtitle: 'Why Choose Us',
+                features_title: 'Platform Features',
+                feature_recycle: 'Material Recycling',
+                feature_recycle_desc: 'Sell unused AI-generated materials and maximize your creative value',
+                feature_copyright: 'Copyright Protection',
+                feature_copyright_desc: 'All materials are copyright-verified with commercial usage rights',
+                feature_service: 'Custom Service',
+                feature_service_desc: 'Directly connect with creators for custom videos, images and more',
+                materials_subtitle: 'Hot Materials',
+                materials_title: 'Discover Premium Assets',
+                filter_newest: 'Newest',
+                filter_hottest: 'Hottest',
+                filter_price: 'Price',
+                material_video: 'Video',
+                material_image: 'Image',
+                material_short: 'Short',
+                material_promo: 'Promo',
+                material_vid1: 'Tech City Promo',
+                material_img1: 'Fantasy Character',
+                material_short1: 'Emotional Short Scene',
+                material_promo1: 'Product Promo',
+                material_purchases: 'purchases',
+                materials_more: 'View More',
+                creators_subtitle: 'Top Creators',
+                creators_title: 'Verified Creators',
+                creator1: 'Creative Xiao Wang',
+                creator1_type: 'Video Creator',
+                creator2: 'Visual Artist',
+                creator2_type: 'Image Creator',
+                creator3: 'Director A Jie',
+                creator3_type: 'Short Film Creator',
+                creator4: 'Promo Master',
+                creator4_type: 'Promo Creator',
+                verified: 'Verified',
+                creator_works: 'works',
+                custom_subtitle: 'Custom Service',
+                custom_title: 'Can\'t find what you need?',
+                custom_desc: 'Connect directly with verified creators for custom videos, images and creative content<br>Professional team creates unique visual works for you',
+                custom_post: 'Post Custom Request',
+                custom_view: 'View Creators',
+                custom_fast: 'Fast Response',
+                custom_fast_desc: 'Creators respond within 24 hours',
+                custom_quality: 'Quality Guarantee',
+                custom_quality_desc: 'Unlimited revisions or refund if unsatisfied',
+                custom_safe: 'Secure Transaction',
+                custom_safe_desc: 'Funds held in escrow until confirmation',
+                join_title: 'Join Our Creator Community',
+                join_desc: 'Publish your AI-generated materials, connect with global buyers, start monetizing your creativity',
+                join_item1: 'Free to join, free to publish',
+                join_item2: 'High revenue share, transparent earnings',
+                join_item3: 'Professional support',
+                join_button: 'Join Now',
+                join_earnings: 'Total Creator Earnings',
+                join_creators: 'Creators',
+                join_works: 'Works',
+                footer_desc: 'Discover unlimited creativity, connect creators and buyers in the AI material marketplace',
+                footer_platform: 'Platform',
+                footer_about: 'About Us',
+                footer_join: 'Become Creator',
+                footer_help: 'Help Center',
+                footer_contact: 'Contact Us',
+                footer_resources: 'Resources',
+                footer_legal: 'Legal',
+                footer_terms: 'Terms of Service',
+                footer_privacy: 'Privacy Policy',
+                footer_copyright: 'Copyright Notice',
+                footer_refund: 'Refund Policy',
+                footer_copyright_text: '© 2024 AI Material Market. All rights reserved.'
+            }
+        };
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            document.getElementById('current-lang').textContent = lang === 'zh' ? '中文' : 'English';
+            document.querySelector('html').setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+            localStorage.setItem('preferredLang', lang);
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.getAttribute('data-lang-value') === lang) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+
+        const langToggle = document.getElementById('lang-toggle');
+        const langMenu = document.getElementById('lang-menu');
+
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            langMenu.classList.remove('show');
+        });
+
+        langMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang-value');
+                setLanguage(lang);
+                langMenu.classList.remove('show');
+            });
+        });
+
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        setLanguage(savedLang);
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
